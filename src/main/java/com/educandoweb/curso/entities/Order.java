@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_order") /*por conta do conflito de palavra reservada ORDER do banco*/
 public class Order implements Serializable {
@@ -20,6 +22,9 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	/*Formatar usando ISO8601*/
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	private Instant moment;
 	
 	/*Mapeando o relacionamento entre muitos pedidos para 1 cliente*/
